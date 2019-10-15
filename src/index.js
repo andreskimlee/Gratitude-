@@ -3,7 +3,7 @@ import income from "../income"
 
 (function() {
   var width = 1500;
-  var height = 500;
+  var height = 650;
 
   var svg = d3.select("body") 
     .append("svg")
@@ -14,9 +14,35 @@ import income from "../income"
     // debugger 
     console.log(income) 
   
+  var defs = svg.append("defs");
+
+  defs.append("pattern")
+    .attr("id", "saitama")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", 1)
+    .attr("width", 1)
+    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    .attr("xlink:href", "./src/images/saitama.jpg")
+
+
+
+
   var simulation = d3.forceSimulation()
-    .force("x", d3.forceX(width/2).strength(0.02))
-    .force("y", d3.forceY(height/2).strength(0.02))
+    .force("x", d3.forceX(width/2).strength(0.1)) // move to svg width center x
+    .force("y", d3.forceY(height/2).strength(0.1)) // move to svg height center y
+    .force("collide", d3.forceCollide(function(d) { 
+      var formatted = ((d.Monthly.replace("$", ""))) 
+      formatted = Number((formatted.replace(",", "")))
+      // console.log(d.Monthly, formatted)
+      return radiusScale(formatted/11); 
+    })) // makes sure circles dont overlap. Input the larget radius
+  var radiusScale = d3.scaleSqrt().domain([3,1500]).range([10,80]) // domain refers to thousands (dollars) 
+
+
+
   d3.queue()
     .defer(d3.csv, "income.csv")
     .await(ready) 
@@ -27,9 +53,20 @@ import income from "../income"
         .data(datapoints)
         .enter().append("circle")
         .attr("class", "country")
-        .attr("r", 10) 
-        .attr("fill", "lightblue")
+        .attr("r", function(d) {
+          // console.log(d.Monthly.slice)
+          var formatted = ((d.Monthly.replace("$", ""))) 
+          formatted = Number((formatted.replace(",", "")))
+              return radiusScale(formatted/10); 
+        }) 
+        .attr("fill", "url(#saitama)")
+        .on("click", function(d){
+          console.log(d)   // refactor to open a modal with the country of choice 
+        })
+        .attr("stroke", "black")
         
+        
+
         simulation.nodes(datapoints) //nodes refers to each circle 
           .on('tick', ticked)
         function ticked() { //magic boilerplate.... 
@@ -41,8 +78,25 @@ import income from "../income"
               return d.y 
             } )
         }
+
+
+      
+
+
+
+
   }
+  
 })();
+
+
+
+
+
+
+
+
+
 
 
 
