@@ -1,153 +1,32 @@
-`git init`
+# Gratitude: Data Visualization Of individual comparison to world data
 
-create .gitignore and add `/node_modules/`
+## Overview | Live (TBD)
+Gratitude is a data visualization tool to those curious on their personal standing in comparison to the world through various data mediums such as food, income, and available leisure time.
 
-`npm init` and follow prompts
+## Functionality & MVP 
+Gratitude users are able to: 
+-Input their own income information to compare to those of other countries. 
+-Input caloric intake (a general measure of the availability of food) in countries 
+-Input leisure time in order to compare how the rest of the world fares with your current availabilty of leisure. 
 
-```
-npm install @babel/core @babel/preset-env autoprefixer babel-loader css-loader mini-css-extract-plugin fibers node-sass postcss-loader sass sass-loader style-loader webpack webpack-cli webpack-dev-server webpack-merge
+In addition, this project contains: 
+- An end of simulation event that will show how you fare in percentage form from other individuals.
+- A closing statement relating back to the title of the project. 
 
-```
+## Data & APIs 
+WorldBank hosts an API (free of charge) that carries a large data set regarding different countries from around the globe. 
 
-create basic `/src` subdirectory file structure
+## WireFrame 
+link_to(https://i.imgur.com/D5XRXSp.png)
 
-```
-- src/
-    - index.js
-    styles/
-        - index.scss
-    scripts/
+## Design
+users bar will load last and have a red or green gradient effect depending on their standing in the world income/food/leisure average.
 
-```
+## Architecture & Technologies 
+Gratitude is built with:
+Javascript for data retrieval, computation, and DOM manipulation.
+D3.js + HTML + SVG + CSS for visualization and interatction 
+Webpack and Babel to bundle js files. 
 
-in root directory, create `webpack.common.js`
-
-```JavaScript
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const outputDir = "./dist";
-
-module.exports = {
-    entry: path.resolve(__dirname, "src", "index.js"), //
-    output: {
-        path: path.join(__dirname, outputDir),
-        filename: "[name].js",
-        publicPath: "/dist/"
-    },
-    resolve: {
-        extensions: [".js"] // if we were using React.js, we would include ".jsx"
-    },
-    module: {
-        rules: [{
-                test: /\.js$/, // if we were using React.js, we would use \.jsx?$/
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["@babel/preset-env"],
-                        exclude: /node_modules/
-                    } // if we were using React.js, we would include "react"
-                }
-            },
-            {
-                test: /\.css$/,
-                use: [{
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            // you can specify a publicPath here
-                            // by default it uses publicPath in webpackOptions.output
-                            publicPath: "../",
-                            hmr: process.env.NODE_ENV === "development"
-                        }
-                    },
-                    "css-loader",
-                    "postcss-loader"
-                ]
-            },
-            {
-                test: /\.scss/,
-                use: [{
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            // you can specify a publicPath here
-                            // by default it uses publicPath in webpackOptions.output
-                            publicPath: "../",
-                            hmr: process.env.NODE_ENV === "development"
-                        }
-                    },
-                    "css-loader",
-                    "sass-loader",
-                    "postcss-loader"
-                ]
-            }
-        ]
-    },
-    plugins: [new MiniCssExtractPlugin({
-        // Options similar to the same options in webpackOptions.output
-        // all options are optional
-        filename: "[name].css",
-        chunkFilename: "[id].css",
-        ignoreOrder: false // Enable to remove warnings about conflicting order
-    }), require("autoprefixer")]
-};
-```
-
-Create `webpack.dev.js`
-
-```JavaScript
-const merge = require("webpack-merge");
-const common = require("./webpack.common.js");
-
-module.exports = merge(common, {
-    mode: "development",
-    devtool: "inline-source-map",
-    devServer: {
-        contentBase: "./",
-        watchContentBase: true,
-        open: "Google Chrome"
-    }
-});
-```
-
-Create `webpack.prod.js`
-
-```JavaScript
-const merge = require("webpack-merge");
-const common = require("./webpack.common.js");
-
-module.exports = merge(common, {
-    mode: "production",
-    devtool: "source-map"
-});
-```
-
-create `postcss.config.js`
-
-```JavaScript
-module.exports = {
-    plugins: {
-        autoprefixer: {}
-    }
-};
-```
-
-add `browserlist` key and update `scripts` in `package.json`
-
-```JavaScript
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "maintained node versions",
-    "not dead"
-  ],
-  "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js",
-    "webpack:watch": "webpack --watch --config webpack.dev.js",
-    "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize"
-  },
-```
-
-create `index.scss` in `/src/styles`
-
-create `index.js` in `/src` directory and import style `/src/styles/index.scss`
-
-create `index.html` and import `dist/main.css` and `dist/main.js` appropriately
+## Bonus Features 
+Future implementations will include the ability to sort by individual countries for comparison. 
