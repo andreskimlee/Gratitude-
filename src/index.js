@@ -37,9 +37,9 @@ import income from "../income"
       var formatted = ((d.Monthly.replace("$", ""))) 
       formatted = Number((formatted.replace(",", "")))
       // console.log(d.Monthly, formatted)
-      return radiusScale(formatted/11); 
+      return radiusScale(formatted/10); 
     })) // makes sure circles dont overlap. Input the larget radius
-  var radiusScale = d3.scaleSqrt().domain([3,1500]).range([10,80]) // domain refers to thousands (dollars) 
+  var radiusScale = d3.scaleSqrt().domain([3,1500]).range([10,70]) // domain refers to thousands (dollars) 
 
 
 
@@ -86,6 +86,8 @@ import income from "../income"
 
 
   }
+
+  
   
 })();
 
