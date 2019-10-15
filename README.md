@@ -10,17 +10,17 @@ Gratitude users are able to:
 * Input leisure time in order to compare how the rest of the world fares with your current availabilty of leisure. 
 
 In addition, this project contains: 
- * An end of simulation event that will show how you fare in percentage form from other individuals.
+ * a modal that will show how you fare in percentage form from other individuals.
  * A closing statement relating back to the title of the project. 
 
 ## Data & APIs 
 WorldBank hosts an API (free of charge) that carries a large data set regarding different countries from around the globe. 
 
 ## WireFrame 
-![alt_text](https://i.imgur.com/D5XRXSp.png)
+![alt_text](https://i.imgur.com/jNrvSCb.png)
 
 ## Design
-users bar will load last and have a red or green gradient effect depending on their standing in the world income/food/leisure average.
+User data will be inputed within the group of circles. Once the user presses enter, the animation will divide the circles in a group of two. The left group will be all individuals who have less than you and those who are greater than or equal to your standing.
 
 ## Architecture & Technologies 
 Gratitude is built with:
