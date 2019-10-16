@@ -2,9 +2,10 @@
 body {
     background-image: linear-gradient(black, grey);
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+    height: 850px;
 }
 
 html { box-sizing: border-box; font-size: 10px; }
@@ -27,7 +28,8 @@ body {
 // for demo
 
 .container {
-    padding-bottom: 20px;
+    margin-left: 892px;
+    margin-top: -98px;
 }
 
 
@@ -50,13 +52,13 @@ $input-text-active: #BFD2FF;
   margin: 0 auto;
   border-radius: 2px;
   padding: 1.4rem 2rem 1.6rem;
-  background: $input-background;
+ 
   &:after {
     content: "";
     position: absolute;
     left: 0px;
     right: 0px;
-    bottom: 0px;
+    bottom: 10px;
     z-index: 999;
     height: 2px;
     border-bottom-left-radius: 2px;
@@ -67,6 +69,8 @@ $input-text-active: #BFD2FF;
     animation: gradient 3s linear infinite;
   }
 }
+
+
 
 .webflow-style-input input {
   flex-grow: 1;
@@ -89,3 +93,9 @@ $input-text-active: #BFD2FF;
     color: $input-text-active;
   }
 }
+
+circle {
+    stroke: #57E6E6;
+    animation: gradient 3s linear infinite;
+}
+
