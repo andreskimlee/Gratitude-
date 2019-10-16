@@ -70,7 +70,10 @@ $input-text-active: #BFD2FF;
   }
 }
 
-
+.user-circle {
+    stroke: white;
+    animation: gradient 3s linear infinite;
+}
 
 .webflow-style-input input {
   flex-grow: 1;
@@ -99,3 +102,51 @@ circle {
     animation: gradient 3s linear infinite;
 }
 
+.greater { 
+    font-size: 40px;
+    position: absolute;
+    top: 40px;
+    left: 900px;
+    opacity: 0;
+    animation-name: fadeInOut;
+    animation-duration: 5s;
+    color: #d8d6d6;
+
+}
+
+.lesser {
+    
+    font-size: 40px;
+    position: absolute;
+    top: 40px;
+    left: 433px;    
+    opacity: 0;
+    animation-name: fadeInOut;
+    animation-duration: 5s;
+    color: #d8d6d6; 
+}
+
+
+@keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+  
+    45% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0%;
+    }
+  }
+
+.title {
+    color:white; 
+    text-decoration: underline;
+    font-size: 40px; 
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 10px; 
+}
