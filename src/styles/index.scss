@@ -1,12 +1,12 @@
 
 body {
-    background-image: linear-gradient(black, grey);
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    height: 850px;
+    height: 900;
 }
+
 
 html { box-sizing: border-box; font-size: 10px; }
 *, *:before, *:after { box-sizing: inherit; }
@@ -29,7 +29,7 @@ body {
 
 .container {
     margin-left: 892px;
-    margin-top: -98px;
+    
 }
 
 
@@ -143,8 +143,7 @@ circle {
 
 .title {
     color:white; 
-    text-decoration: underline;
-    font-size: 40px; 
+    font-size: 20px; 
     position: absolute;
     top: 0px;
     left: 0px;
