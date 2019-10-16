@@ -13,15 +13,16 @@ import income from "../income"
     .attr("transform", "translate(0,0)")
  
 
-  var simulation = d3.forceSimulation()
+  var simulation = d3.forceSimulation() 
     .force("x", d3.forceX(width/2).strength(0.05)) 
     .force("y", d3.forceY(height/2).strength(0.05)) 
     .force("collide", d3.forceCollide(function(d) { 
       var formatted = ((d.Monthly.replace("$", ""))) 
       formatted = Number((formatted.replace(",", "")))
-      return radiusScale(formatted/15); 
-    }
-    )) // makes sure circles dont overlap. Input the larget radius
+      return radiusScale(formatted/14); 
+    }))
+    
+    
   var radiusScale = d3.scaleSqrt().domain([3,1500]).range([10,90]) // domain refers to thousands (dollars) 
 
   d3.queue()
@@ -35,7 +36,6 @@ import income from "../income"
         .enter().append("circle")
         .attr("class", "country")
         .attr("r", function(d) {
-          // console.log(d.Monthly.slice)
           var formatted = ((d.Monthly.replace("$", ""))) 
           formatted = Number((formatted.replace(",", "")))
               return radiusScale(formatted/20); 
@@ -43,7 +43,7 @@ import income from "../income"
         .attr("fill", "black")
         .style("opacity", .3) 
         .on("click", function(d){
-          console.log(d)  
+          clicked(d)
         })
       
         simulation.nodes(datapoints) //nodes refers to each circle 
@@ -61,7 +61,7 @@ import income from "../income"
         var forceX = d3.forceX(function(d) {
           var formatted = ((d.Monthly.replace("$", ""))) 
           formatted = Number((formatted.replace(",", "")))
-          if (formatted > 8000) {
+          if (formatted > 4000) {
 
               return 1000 
           } else {
@@ -69,29 +69,33 @@ import income from "../income"
           }
         })
 
+        d3.select(".combine-button")
+          .on("click", function(d) {
+            debugger 
+            simulation.force("x", d3.forceX(width/2).strength(.05)) 
+            simulation.force("y", d3.forceY(height/2).strength(.05)) 
+          })
+
 
         var input = document.getElementsByClassName("input-field");
         input[0].addEventListener("keyup", function(event) {
           if (event.keyCode === 13) {
             event.preventDefault();
+            simulation.nodes().push({Monthly: "5000", vx: -4.155685920787559, vy: -0.00011805972401546342, x: 500.00000266407596, y: 382.51544272333416})
+            simulation.restart() 
+            console.log(simulation.nodes())
+            // svg.selectAll(".country")
+            //   .enter()
+            //   .append("circle")
+            //   .attr("r", 5)
+            //   .attr("fill", "white")
             input[0].value = ""
+            simulation.restart() 
             generateLessGreaterText() //not important
-            simulation.force("x", forceX).alphaTarget(0.1).restart() 
+            simulation.force("x", forceX).alphaTarget(0.4).restart() 
             
           }
         });
-
-        function restart() {        
-          circles.enter().insert("circle")
-              .attr("class", "country")
-              .attr("r", 5)
-              .on("mousedown", mousedownNode);        
-      
-          simulation.start();
-        }
-        
-          
-
 
 
         function generateLessGreaterText () {

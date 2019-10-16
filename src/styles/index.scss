@@ -4,7 +4,7 @@ body {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    height: 900;
+    height: 820px; 
 }
 
 
@@ -29,6 +29,7 @@ body {
 
 .container {
     margin-left: 892px;
+    
     
 }
 
@@ -142,10 +143,87 @@ circle {
   }
 
 .title {
-    color:white; 
-    font-size: 20px; 
     position: absolute;
     top: 0px;
     left: 0px;
     margin: 10px; 
+    color: rgb(218, 218, 218); 
+    font-family: 'Helvetica Neue', sans-serif; 
+    font-size: 30px; 
+    font-weight: bold; 
+    letter-spacing: -1px; 
+    line-height: 1; 
+    display: flex;
+    flex-direction: column;
 }
+
+.linkedin-logo, .github {
+    width: 40px;
+    height: 40px;
+    /* margin: 5px; */
+   
+    margin-top: 10px;
+}
+
+.combine-button {
+    position: relative;
+    color: rgb(218, 218, 218); 
+    top: -40px;
+    left: 0px;
+    font-family: 'Helvetica Neue', sans-serif; 
+    font-size: 30px; 
+    font-weight: bold; 
+    letter-spacing: -1px; 
+    line-height: 1; 
+    width: 162px;
+    height: 50px;
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: 999;
+        height: 2px;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+        background-position: 0% 0%;
+        background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
+        background-size: 500% auto;
+        animation: gradient 3s linear infinite;
+    } 
+}
+
+.combine-button:hover {
+    cursor: pointer; 
+}
+
+@-webkit-keyframes hvr-pop {
+    50% {
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+    }
+  }
+  @keyframes hvr-pop {
+    50% {
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+    }
+  }
+  .hvr-pop {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  }
+  .hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {
+    -webkit-animation-name: hvr-pop;
+    animation-name: hvr-pop;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+  }
