@@ -71,10 +71,6 @@ $input-text-active: #BFD2FF;
   }
 }
 
-.user-circle {
-    stroke: white;
-    animation: gradient 3s linear infinite;
-}
 
 .webflow-style-input input {
   flex-grow: 1;
@@ -157,6 +153,13 @@ circle {
     flex-direction: column;
 }
 
+
+
+
+.title:hover {
+    cursor: pointer;
+}
+
 .linkedin-logo, .github {
     width: 40px;
     height: 40px;
@@ -177,21 +180,9 @@ circle {
     line-height: 1; 
     width: 162px;
     height: 50px;
-    &:after {
-        content: "";
-        position: absolute;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
-        z-index: 999;
-        height: 2px;
-        border-bottom-left-radius: 2px;
-        border-bottom-right-radius: 2px;
-        background-position: 0% 0%;
-        background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
-        background-size: 500% auto;
-        animation: gradient 3s linear infinite;
-    } 
+    border: 1px solid teal;
+    
+  
 }
 
 .combine-button:hover {

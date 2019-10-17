@@ -11,7 +11,7 @@ import income from "../income"
     .attr("width", width)
     .append("g")
     .attr("transform", "translate(0,0)")
- 
+  
 
   var simulation = d3.forceSimulation() 
     .force("x", d3.forceX(width/2).strength(0.05)) 
@@ -31,8 +31,7 @@ import income from "../income"
   
 
   function ready (error, datapoints) {
-      var circles = svg.selectAll(".country")
-        .data(datapoints)
+      var circles = svg.selectAll(".country").data(datapoints)
         .enter().append("circle")
         .attr("class", "country")
         .attr("r", function(d) {
@@ -43,11 +42,14 @@ import income from "../income"
         .attr("fill", "black")
         .style("opacity", .3) 
         .on("click", function(d){
-          clicked(d)
+          console.log(d) 
         })
       
-        simulation.nodes(datapoints) //nodes refers to each circle 
+        simulation.nodes(datapoints) 
           .on('tick', ticked)
+        debugger 
+
+
         function ticked() { //magic boilerplate.... 
           circles
             .attr("cx", function(d) {
@@ -70,20 +72,39 @@ import income from "../income"
         })
 
         d3.select(".combine-button")
-          .on("click", function(d) {
-            debugger 
+          .on("click", function(d) { 
             simulation.force("x", d3.forceX(width/2).strength(.05)) 
             simulation.force("y", d3.forceY(height/2).strength(.05)) 
           })
+
+          d3.select(".title")
+          .on("click", function(d) {
+            simulation.force("x", d3.forceX(width/2).strength(1)) 
+            simulation.force("y", d3.forceY(height/2).strength(1)) 
+          })
+
 
 
         var input = document.getElementsByClassName("input-field");
         input[0].addEventListener("keyup", function(event) {
           if (event.keyCode === 13) {
             event.preventDefault();
-            simulation.nodes().push({Monthly: "5000", vx: -4.155685920787559, vy: -0.00011805972401546342, x: 500.00000266407596, y: 382.51544272333416})
-            simulation.restart() 
-            console.log(simulation.nodes())
+            circles.enter().append("circle")
+              .attr("r", 5) 
+              .attr("fill", "white")
+            datapoints.push({Monthly: "10000"})
+            console.log(datapoints)
+            simulation.nodes(datapoints) 
+              .on('tick', ticked)
+            
+            
+
+
+          
+          //   simulation.nodes(datapoints) 
+          // .on('tick', ticked)
+
+
             // svg.selectAll(".country")
             //   .enter()
             //   .append("circle")
