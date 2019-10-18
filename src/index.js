@@ -33,7 +33,7 @@ import income from "../income"
   
 
   function ready (error, datapoints) {
-      debugger 
+      // debugger 
         svg.selectAll(".country").data(datapoints)
         .enter()
         .append("circle")
@@ -79,7 +79,7 @@ import income from "../income"
         var forceX = d3.forceX(function(d) {
           var formatted = ((d.Monthly.replace("$", ""))) 
           formatted = Number((formatted.replace(",", "")))
-          debugger 
+          // debugger 
           if (formatted < input[0].value) {
               return 1000 
           } else {
@@ -149,7 +149,7 @@ import income from "../income"
             formatted = Number((formatted.replace(",", "")))
             array.push(formatted) 
           })
-          debugger 
+          // debugger 
           var L = 0;
           var S = 0;
           var N = array.length
