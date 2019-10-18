@@ -1,5 +1,4 @@
 import './styles/index.scss';
-import income from "../income"
 
 (function() {
   var width = 1500;
