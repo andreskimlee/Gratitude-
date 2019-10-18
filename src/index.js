@@ -45,9 +45,14 @@ import income from "../income"
         }) 
         .attr("fill", "black")
         .style("opacity", .3) 
-        .on("click", function(d){
-            console.log(d) 
-        })
+        .on("mouseover", function(d){
+          d3.select("body").append("text")
+          .html(`${d.Country} <br> $${d.Monthly}`).attr("class", "country-text")
+         })
+         .on("mouseout", function(d){
+          d3.select(".country-text").remove()
+         })
+        
         
         
         simulation.nodes(datapoints) 
@@ -74,12 +79,12 @@ import income from "../income"
         var forceX = d3.forceX(function(d) {
           var formatted = ((d.Monthly.replace("$", ""))) 
           formatted = Number((formatted.replace(",", "")))
-          if (formatted > 4000) {
-
+          debugger 
+          if (formatted < input[0].value) {
               return 1000 
           } else {
-            return 500 
-          }
+            return 500
+          } 
         })
 
         d3.select(".combine-button")
@@ -100,7 +105,7 @@ import income from "../income"
         input[0].addEventListener("keyup", function(event) {
           if (event.keyCode === 13) {
             event.preventDefault();
-            datapoints.push({Monthly: `${input[0].value}`})
+            datapoints.push({Country: "user", Monthly: `${input[0].value}`})
              svg.selectAll(".countries")
              .data(datapoints)
              .enter()
@@ -109,35 +114,60 @@ import income from "../income"
              .attr("r", function(d) {
                var formatted = ((d.Monthly.replace("$", ""))) 
                formatted = Number((formatted.replace(",", "")))
-                   return radiusScale(formatted/20); 
+                   return radiusScale(formatted/20);       
              }) 
-             .attr("fill", "black")
-             .style("opacity", .3) 
-             .on("click", function(d){
-                 console.log(d) 
+             .attr("fill", function(d) {
+               if (d.Country === "user") {
+                 return "white" 
+               } else {
+                 return "black" 
+               }
              })
+             .style("opacity", .3) 
             simulation.nodes(datapoints) 
               .on('tick', ticked)
-            input[0].value = ""
+            simulation.restart(); 
             generateLessGreaterText() //not important
-            simulation.force("x", forceX).alphaTarget(0.2)
-            
-
+            simulation.force("x", forceX).alphaTarget(0.6)
+            input[0].value = ""
+             
           }
         });
 
 
         function generateLessGreaterText () {
           d3.select("body").append("text")
-              .text("Less")
+              .text(`You're better off than ${percentRank(Number(input[0].value))}% of the world`)
               .attr("class", "lesser")
-              d3.select("body").append("text")
-              .text("Greater")
-              .attr("class", "greater")
+              console.log(percentRank(Number(input[0].value)))
         }
 
-        
-        
+        function percentRank(n) {
+          var array = [] 
+          datapoints.forEach (country => {
+            var formatted = ((country.Monthly.replace("$", ""))) 
+            formatted = Number((formatted.replace(",", "")))
+            array.push(formatted) 
+          })
+          debugger 
+          var L = 0;
+          var S = 0;
+          var N = array.length
+      
+          for (var i = 0; i < array.length; i++) {
+              if (array[i] < n) {
+                  L += 1
+              } else if (array[i] === n) {
+                  S += 1
+              } else {
+      
+              }
+          }
+      
+          var pct = (L + (0.5 * S)) / N
+      
+          return Math.floor(pct * 100) 
+      }
 
   }
 

@@ -106,7 +106,7 @@ circle {
     position: absolute;
     top: 40px;
     left: 900px;
-    opacity: 0;
+    opacity: 1;
     animation-name: fadeInOut;
     animation-duration: 5s;
     color: #d8d6d6;
@@ -118,7 +118,7 @@ circle {
     font-size: 40px;
     position: absolute;
     top: 40px;
-    left: 433px;    
+    left: 374px;   
     opacity: 0;
     animation-name: fadeInOut;
     animation-duration: 5s;
@@ -410,4 +410,14 @@ p {
   from { width: 0 }
   to { width: 100% }
 }
+
+.country-text {
+  position: absolute; 
+  color: rgb(218, 218, 218);  
+  font-size: 20px;
+  top: 20px; 
+  text-align: center;
+  font-family: sans-serif;
+}
+
 
