@@ -40,12 +40,12 @@ import './styles/index.scss';
   var radiusScale = d3.scaleSqrt().domain([3,1500]).range([10,90]) // domain refers to thousands (dollars) 
 
   d3.queue()
-    .defer(d3.csv, "./income.csv")
+    .defer(d3.csv, "./Income.csv")
     .await(ready) 
   
 
   function ready (error, datapoints) {
-        debugger 
+         
         svg.selectAll(".Country").data(datapoints)
         .enter().append("circle")
           .attr("class", "countries")
