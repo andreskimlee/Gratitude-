@@ -98,8 +98,9 @@ $input-text-active: #BFD2FF;
 
 circle {
     stroke: #57E6E6;
-    animation: gradient 3s linear infinite;
 }
+
+
 
 .greater { 
     font-size: 40px;
@@ -417,7 +418,11 @@ p {
   font-size: 20px;
   top: 20px; 
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Helvetica Neue', sans-serif; 
+    font-weight: bold; 
+    letter-spacing: -1px; 
+    line-height: 1; 
+    animation-name: fadeInOut;
+    animation-duration: 2s;
 }
-
 

@@ -4,15 +4,28 @@ import income from "../income"
 (function() {
   var width = 1500;
   var height = 765;
-  var angles = d3.range(0, 2 * Math.PI, Math.PI / 200);
 
-  var svg = d3.select("body") 
-    .append("svg")
+  var svg = d3.select("body").append("svg")
+    svg
     .attr("height", height)
     .attr("width", width)
     .append("g")
     .attr("transform", "translate(0,0)")
-  
+ 
+    
+  svg.append("defs")
+    .append("pattern")
+    .attr("id", "user-circle")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", 1)
+    .attr("width", 1)
+    .attr("preserveAspectRatio", "none")
+    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    .attr("xlink:href", "./src/images/circle.gif");
+
 
   var simulation = d3.forceSimulation() 
     .force("x", d3.forceX(width/2).strength(0.05)) 
@@ -28,12 +41,12 @@ import income from "../income"
   var radiusScale = d3.scaleSqrt().domain([3,1500]).range([10,90]) // domain refers to thousands (dollars) 
 
   d3.queue()
-    .defer(d3.csv, "income.csv")
+    .defer(d3.csv, "./income.csv")
     .await(ready) 
   
 
   function ready (error, datapoints) {
-     
+        debugger 
         svg.selectAll(".Country").data(datapoints)
         .enter().append("circle")
           .attr("class", "countries")
@@ -99,7 +112,7 @@ import income from "../income"
           })
 
 
-
+        
         var input = document.getElementsByClassName("input-field");
         input[0].addEventListener("keyup", function(event) {
           if (event.keyCode === 13) {
@@ -117,12 +130,16 @@ import income from "../income"
              }) 
              .attr("fill", function(d) {
                if (d.Country === "user") {
-                 return "white" 
+                 return "url(#user-circle)" 
                } else {
                  return "black" 
                }
              })
-             .style("opacity", .3) 
+             .style("opacity", function(d) {
+                if (d.Country === "user") {
+                  return .5
+                } else return .3
+             }) 
             simulation.nodes(datapoints) 
               .on('tick', ticked)
             simulation.restart(); 
