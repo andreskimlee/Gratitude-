@@ -34,16 +34,15 @@ import income from "../income"
 
   function ready (error, datapoints) {
      
-        svg.selectAll(".country").data(datapoints)
-        .enter()
-        .append("circle")
-        .attr("class", "countries")
-        .attr("r", function(d) {
+        svg.selectAll(".Country").data(datapoints)
+        .enter().append("circle")
+          .attr("class", "countries")
+          .attr("r", function(d) {
           var formatted = ((d.Monthly.replace("$", ""))) 
           formatted = Number((formatted.replace(",", "")))
               return radiusScale(formatted/20); 
-        }) 
-        .attr("fill", "black")
+          }) 
+          .attr("fill", "black")
         .style("opacity", .3) 
         .on("mouseover", function(d){
           d3.select("body").append("text")
