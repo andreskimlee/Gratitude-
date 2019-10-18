@@ -33,7 +33,7 @@ import income from "../income"
   
 
   function ready (error, datapoints) {
-      // debugger 
+     
         svg.selectAll(".country").data(datapoints)
         .enter()
         .append("circle")
@@ -57,17 +57,17 @@ import income from "../income"
         
         simulation.nodes(datapoints) 
           .on('tick', ticked)
-        // debugger 
+       
 
 
         function ticked() { //magic boilerplate.... 
           svg.selectAll('.countries')
             .attr("cx", function(d) {
-              // debugger 
+             
               return d.x
             })
             .attr("cy", function(d) {
-              // debugger
+            
               return d.y 
             } )
         }
@@ -79,7 +79,7 @@ import income from "../income"
         var forceX = d3.forceX(function(d) {
           var formatted = ((d.Monthly.replace("$", ""))) 
           formatted = Number((formatted.replace(",", "")))
-          // debugger 
+         
           if (formatted < input[0].value) {
               return 1000 
           } else {
@@ -149,7 +149,7 @@ import income from "../income"
             formatted = Number((formatted.replace(",", "")))
             array.push(formatted) 
           })
-          // debugger 
+         
           var L = 0;
           var S = 0;
           var N = array.length
