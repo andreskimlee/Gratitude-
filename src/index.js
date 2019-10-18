@@ -34,7 +34,7 @@ import income from "../income"
 
   function ready (error, datapoints) {
       debugger 
-      var circles = svg.selectAll(".country").data(datapoints)
+        svg.selectAll(".country").data(datapoints)
         .enter()
         .append("circle")
         .attr("class", "countries")
