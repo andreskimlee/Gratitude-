@@ -47,7 +47,7 @@ import income from "../income"
         .style("opacity", .3) 
         .on("mouseover", function(d){
           d3.select("body").append("text")
-          .html(`${d.Country} <br> $${d.Monthly}`).attr("class", "country-text")
+          .html(`${d.Country} <br> Average Monthly: $${d.Monthly}`).attr("class", "country-text")
          })
          .on("mouseout", function(d){
           d3.select(".country-text").remove()
